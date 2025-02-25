@@ -13,7 +13,7 @@ limit 1;
 
 select track_id, name, duration
 from track t 
-where duration >=3.5; 
+where duration >= 210; 
 
 
 --3.Названия сборников, вышедших в период с 2018 по 2020 год включительно.
@@ -35,9 +35,10 @@ where name not like '% %';
 
 
 select track_id, name
-from track t 
-where name ilike '%My%' or name ilike '%мой%'
+from track t
+where string_to_array(lower(name), ' ') && array['my']
 order by track_id;
+
 
 --Part 2.
 --1.Количество исполнителей в каждом жанре.
@@ -53,17 +54,16 @@ group by mg.genre_id;
 --2.Количество треков, вошедших в альбомы 2019–2020 годов.
 
 
-select t.track_id, count(*)
+select count(t.track_id) as NumberOfTracks
 from track t 
 join album a on t.album_id = a.album_id 
-where a.release_year between 2019 and 2020
-group by t.track_id;
+where a.release_year between 2019 and 2020;
 
 
 --3.Средняя продолжительность треков по каждому альбому.
 
 
-select a.title, a.album_id , avg(t.duration) as AverageDuration
+select a.title, a.album_id , round(avg(t.duration),2) as AverageDuration
 from track t 
 join album a on t.album_id = a.album_id 
 group by a.album_id

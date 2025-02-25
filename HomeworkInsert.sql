@@ -73,6 +73,14 @@ insert into track(name, duration, album_id)
 values 
 ('One Dance', 4.46, 4);
 
+insert into track(name, duration, album_id)
+values 
+('My Own Universe', 240, 2),
+('Oh My God', 300, 3),
+('By Myself', 308, 5),
+('Myself', 380, 7);
+
+
 insert into playlist(title, release_year)
 values 
 ('Positive', 2011),
